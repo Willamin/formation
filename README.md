@@ -3,8 +3,21 @@
 `$ crystal init app` replacement
 
 ## Usage
+Recommended usage
+```
+$ shards build                        # build formation
+$ mv bin/formation ~/bin/formation    # move the binary to somewhere in your path
+$ cd the/place/you/keep/projects      # change your directory to where you keep projects
+$ formation MyAppName                 # form a project in the current directory named my-app-name
+```
 
-TODO: Write usage instructions here
+If the [shards subcommand fallback PR](https://github.com/crystal-lang/shards/pull/202) gets accepted, this would be recommended usage
+```
+$ shards build                        # build formation
+$ mv bin/formation ~/bin/shards-form  # move the binary to somewhere in your path
+$ cd the/place/you/keep/projects      # change your directory to where you keep projects
+$ shards form MyAppName               # form a project in the current directory named my-app-name
+```
 
 ## Contributing
 
