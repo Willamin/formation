@@ -1,0 +1,13 @@
+name: <%= @appname %>
+version: 0.1.0
+
+authors:
+  - <%= "#{@name} <#{@email}>" %>
+
+targets:
+  <%= @appname %>:
+    main: src/<%= @appname %>.cr
+
+crystal: <%= @crystal %>
+
+license: MIT
