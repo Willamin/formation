@@ -46,25 +46,18 @@ module Formation
       {% for template in run("#{__DIR__}/get_all_templates.cr").lines %}
         %relative_name = {{template}}.lchop("#{__DIR__}/templates/")
         %template_dir = File.dirname(%relative_name)
-
-        # remove .ecr from the end
         %dest_filename = File.basename(%relative_name, ".ecr")
-
-        # remove __DIR__/templates from the beginning
         %path = %template_dir.lchop("#{__DIR__}/templates/")
-
-        # TODO
         %fullpath = File.expand_path(File.join(destination, %path, %dest_filename))
-
         %dir = (%fullpath.split("/") - [File.basename(%dest_filename)]).join("/")
-
         unless Dir.exists?(File.dirname(%fullpath))
           Dir.mkdir_p(%dir)
         end
-
         %file = File.new(%fullpath, mode: "w")
         ECR.embed {{template}}, %file
         %file.close
+
+        File.rename(%fullpath, %fullpath.gsub(/appname/, @appname))
       {% end %}
     end
   end
