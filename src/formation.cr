@@ -9,7 +9,7 @@ module Formation
     def initialize(name : String)
       @appname = name.kebabcase
       @apptitle = name.camelcase
-      @destination = File.join("#{__DIR__}", @appname)
+      @destination = File.join(Dir.current, @appname)
     end
 
     property appname : String
