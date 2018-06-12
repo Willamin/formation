@@ -77,3 +77,4 @@ end
 app = Formation::App.new(ARGV[0])
 # pp app.list_templates
 app.run_templates
+`cd #{app.destination} && git init && git add . && git commit -m ":sparkles: initial formation"`
