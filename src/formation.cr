@@ -74,7 +74,18 @@ if ARGV.size == 0
   exit 1
 end
 
+macro run(command)
+  puts "`cd #{app.destination} && #{{{command}}}`"
+  `cd #{app.destination} && #{{{command}}}`
+end
+
 app = Formation::App.new(ARGV[0])
 # pp app.list_templates
 app.run_templates
-`cd #{app.destination} && git init && git add . && git commit -m ":sparkles: initial formation" && shards && git commit -m "Add shard.lock"`
+
+run(%(git init))
+run(%(git add .))
+run(%(git commit -m ":sparkles: initial formation"))
+run(%(shards install))
+run(%(git add .))
+run(%(git commit -m "Add shard.lock"))
