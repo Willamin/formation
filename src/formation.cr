@@ -74,14 +74,20 @@ if ARGV.size == 0
   exit 1
 end
 
-macro run(command)
-  puts "`cd #{app.destination} && #{{{command}}}`"
-  `cd #{app.destination} && #{{{command}}}`
+def run(command)
+  puts "`cd #{APP.destination} && #{command}`"
+  `cd #{APP.destination} && #{command}`
+  unless $?.success?
+    puts "Something went wrong. I'll wait here until you fix it, then I'll try it again."
+    puts "press [enter] to continue"
+    gets
+    run(command)
+  end
 end
 
-app = Formation::App.new(ARGV[0])
+APP = Formation::App.new(ARGV[0])
 # pp app.list_templates
-app.run_templates
+APP.run_templates
 
 run(%(git init))
 run(%(git add .))
